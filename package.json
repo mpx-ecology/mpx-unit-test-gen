@@ -1,6 +1,6 @@
 {
   "name": "@mpxjs/unit-test-gen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "mpx unit test gen",
   "main": "index.js",
   "scripts": {

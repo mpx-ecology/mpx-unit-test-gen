@@ -11,7 +11,7 @@ it('check components computed {{computed | getGenName}}', async function () {
     {% endif %}
     {% endfor %}
     await comp.instance.$nextTick()
-    const domHTML = testPropComp.dom.innerHTML
+    const domHTML = comp.dom.innerHTML
     expect(domHTML).toMatchSnapshot()
 }){{'\n'}}
 {%- endfor %}

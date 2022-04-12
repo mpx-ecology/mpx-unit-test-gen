@@ -36,7 +36,7 @@ export function run(params: string[]) {
     }
     const inputPath = params[0];
     const inputFilenameNoExt = path.basename(inputPath, path.extname(inputPath));
-    const specFileName = path.join(path.dirname(inputPath),`${inputFilenameNoExt}.generated.spec.js`);
+    const specFileName = path.join(path.dirname(inputPath),`${inputFilenameNoExt}.spec.js`);
     const inputAbsolutePath: string = path.join(__dirname, inputPath);
     const sourceCode = readFileSync(inputPath).toString();
     const parts = parseComponent(sourceCode, {
