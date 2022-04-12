@@ -1,6 +1,6 @@
 {
-  "name": "mpx-unit-test-gen",
-  "version": "1.0.0",
+  "name": "@mpxjs/unit-test-gen",
+  "version": "0.0.1",
   "description": "mpx unit test gen",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "typescript": "^4.6.3"
   },
   "bin": {
-    "mpx-test-gen": "./lib/cli.js"
+    "mpx-test": "./lib/cli.js"
   },
   "devDependencies": {
     "@mpxjs/webpack-plugin": "^2.7.25",

@@ -1,7 +1,9 @@
 // @ts-ignore
 import * as nunjucks from 'nunjucks';
+import * as path from 'path';
 
-const env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
+const viewsPath = path.join(__dirname, '../views')
+const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(viewsPath));
 env.addFilter('getGenName', (name: string) => {
     return name.split('_')[0]
 })
