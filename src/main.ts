@@ -39,7 +39,6 @@ export function run(params: string[]) {
     const specFileName = path.join(path.dirname(inputPath),`${inputFilenameNoExt}.generated.spec.js`);
     const inputAbsolutePath: string = path.join(__dirname, inputPath);
     const sourceCode = readFileSync(inputPath).toString();
-
     const parts = parseComponent(sourceCode, {
         inputPath,
         needMap: false,

@@ -98,19 +98,60 @@ export function parseSourceFile(file: any): ParsedSourceFile {
         if (propertyValue && propertyValue.properties) {
             const properties = propertyValue.properties as Array<t.ObjectProperty>
             properties.forEach((item) => {
-                if (item.key) {
+                // 属性通过 Store Map 语法加入组件
+                // @ts-ignore
+                if (item.type === 'SpreadElement') {
+                    handleComponentMapProperty(item, type)
+                } else if (item.key) {
                     // @ts-ignore
-                    const keyName = genKeyName(item.key.name, item.key.start, item.key.end)
-                    // @ts-ignore
-                    result[type].push(keyName)
-                    // @ts-ignore
-                    result['allKeys'][keyName] = {
-                        name: keyName,
-                        type,
-                        deps: {}
-                    }
+                    addPropertyToResult(item.key.name, item.key.start, item.key.end, type)
                 }
             })
+        }
+    }
+
+    function handleComponentMapProperty(item: any, type: string) {
+        if (item.argument && item.argument.type === 'CallExpression') {
+            const callExpItem = item.argument
+            const callExparguments = callExpItem.arguments
+            const mapPropertys = callExparguments[0]
+            if (mapPropertys.type === 'ObjectExpression') {
+                const eleProperties = mapPropertys.properties
+                eleProperties.forEach((eleProp:any) => {
+                    if(eleProp.type === 'ObjectProperty' && eleProp.value === 'StringLiteral') {
+                        addPropertyToResult(eleProp.value.value, eleProp.value.start, eleProp.value.end, type)
+                    }
+                })
+
+            } else if (mapPropertys.type === 'ArrayExpression') {
+                const elements = mapPropertys.elements
+                elements.forEach((ele:any) => {
+                    // map[{}] 这种形式
+                    if (ele.type === 'ObjectExpression') {
+                        const eleProperties = ele.properties
+                        eleProperties.forEach((eleProp:any) => {
+                            if(eleProp.type === 'ObjectProperty' && eleProp.value === 'StringLiteral') {
+                                addPropertyToResult(eleProp.value.value, eleProp.value.start, eleProp.value.end, type)
+                            }
+                        });
+                    }
+                    if (ele.type === 'StringLiteral') {
+                        addPropertyToResult(ele.value, ele.start, ele.end, type)
+                    }
+                });
+            }
+        }
+    }
+
+    function addPropertyToResult(itemName: string, start: number, end: number, type:string) {
+        const keyName = genKeyName(itemName, start, end)
+        // @ts-ignore
+        result[type].push(keyName)
+        // @ts-ignore
+        result['allKeys'][keyName] = {
+            name: keyName,
+            type,
+            deps: {}
         }
     }
 

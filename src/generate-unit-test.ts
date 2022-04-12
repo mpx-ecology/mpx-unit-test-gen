@@ -50,5 +50,12 @@ export function generateUnitTest(sourceResult: any, compPath: string) {
         })
         unitTestStr = unitTestStr + watchsStr + '\n'
     }
+    if (sourceResult.methods && sourceResult.methods.length > 0) {
+        const methodsStr = env.render(`methods.js`, {
+            methods: sourceResult.methods,
+            allKeys: sourceResult.allKeys
+        })
+        unitTestStr = unitTestStr + methodsStr + '\n'
+    }
     return unitTestStr
 }

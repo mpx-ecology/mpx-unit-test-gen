@@ -7,5 +7,6 @@ report-diff-ali.json
 deploy/
 output/
 dist/
+testFile/
 .vscode/
 .cache/
