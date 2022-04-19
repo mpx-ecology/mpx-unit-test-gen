@@ -11,5 +11,3 @@ describe('test component {{path}}', () => {
         ])
         comp = testUtils.createCompAndAttach(compPath)
     })
-
-})

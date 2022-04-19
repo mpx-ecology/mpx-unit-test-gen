@@ -14,7 +14,6 @@ export function generateUnitTest(sourceResult: any, compPath: string) {
         process.exit(1)
     }
     let unitTestStr: string = ''
-    console.log(sourceResult.usingComponents)
     // @ts-ignore
     const compTempStr = env.render(`component.js`, {
         path: compPath,

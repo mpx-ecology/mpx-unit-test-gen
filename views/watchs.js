@@ -1,6 +1,6 @@
 // 组件watch属性，我们需要在所监听数据改变之后对组件状态进行断言
 {% for watch in watchs-%}
-it('check components watch {{watch}}', async function () {
+it('check components watch {{watch | getGenName}}', async function () {
     // 当{{watch}} 监听触发时，需要做出相应断言
     {% for depKey, depValue in  allKeys[watch].deps %}
 

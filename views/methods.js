@@ -10,3 +10,7 @@ it('check components method {{method | getGenName}}', async function () {
     // 事件执行后，对组件相应属性或视图变化做对应的预期
 }){{'\n'}}
 {%- endfor %}
+
+
+
+})
